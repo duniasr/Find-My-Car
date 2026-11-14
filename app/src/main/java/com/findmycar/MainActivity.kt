@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.findmycar
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,18 +17,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.findmycar.ui.theme.FindMyCarTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
-                MyApplicationApp()
+            FindMyCarTheme {
+                FindMyCarApp()
             }
         }
     }
@@ -36,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
 @PreviewScreenSizes
 @Composable
-fun MyApplicationApp() {
+fun FindMyCarApp() {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
 
     NavigationSuiteScaffold(
@@ -58,7 +57,7 @@ fun MyApplicationApp() {
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             Greeting(
-                name = "Android",
+                name = "Find My Car",
                 modifier = Modifier.padding(innerPadding)
             )
         }
@@ -77,7 +76,7 @@ enum class AppDestinations(
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "¡Bienvenido a $name!",
         modifier = modifier
     )
 }
@@ -85,7 +84,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MyApplicationTheme {
-        Greeting("Android")
+    FindMyCarTheme {
+        Greeting("Find My Car")
     }
 }

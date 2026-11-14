@@ -1,0 +1,11 @@
+# Reglas del proyecto Find My Car para asistentes de IA
+
+- **Paquete Base**: Siempre utilizar `com.findmycar`.
+- **Arquitectura**: MVVM + Clean Architecture.
+- **UI Framework**: Jetpack Compose (Material 3).
+- **Persistencia**: Room Database en `com.findmycar.data.local`.
+- **Organización de pantallas**:
+  - Mapa: `com.findmycar.ui.map`
+  - Formulario de aparcamiento: `com.findmycar.ui.park`
+  - Lista de coches: `com.findmycar.ui.mycars`
+  - Componentes reutilizables: `com.findmycar.ui.components`
