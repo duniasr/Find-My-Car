@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -15,10 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.findmycar.ui.map.MapScreen
 import com.findmycar.ui.theme.FindMyCarTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @PreviewScreenSizes
 @Composable
 fun FindMyCarApp() {
-    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
+    var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.MAP) }
 
     NavigationSuiteScaffold(
         navigationSuiteItems = {
@@ -56,10 +59,11 @@ fun FindMyCarApp() {
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Find My Car",
-                modifier = Modifier.padding(innerPadding)
-            )
+            when (currentDestination) {
+                AppDestinations.MAP -> MapScreen(modifier = Modifier.padding(innerPadding))
+                AppDestinations.PARK -> PlaceholderScreen("Formulario de Aparcar", modifier = Modifier.padding(innerPadding))
+                AppDestinations.MY_CARS -> PlaceholderScreen("Mis Coches Aparcados", modifier = Modifier.padding(innerPadding))
+            }
         }
     }
 }
@@ -68,23 +72,25 @@ enum class AppDestinations(
     val label: String,
     val icon: Int,
 ) {
-    HOME("Home", R.drawable.ic_home),
-    FAVORITES("Favorites", R.drawable.ic_favorite),
-    PROFILE("Profile", R.drawable.ic_account_box),
+    MAP("Mapa", R.drawable.ic_home),
+    PARK("Aparcar", R.drawable.ic_favorite),
+    MY_CARS("Mis Coches", R.drawable.ic_account_box),
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "¡Bienvenido a $name!",
-        modifier = modifier
-    )
+fun PlaceholderScreen(title: String, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Pantalla: $title")
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun FindMyCarAppPreview() {
     FindMyCarTheme {
-        Greeting("Find My Car")
+        FindMyCarApp()
     }
 }
