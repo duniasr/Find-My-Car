@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 data class MapUiState(
     val searchQuery: String = "",
     val isLoading: Boolean = false,
-    val userLatitude: Double = 40.416775, // Madrid (Coordenada por defecto)
+    val userLatitude: Double = 40.416775,
     val userLongitude: Double = -3.703790,
     val parkingPois: List<ParkingPoi> = emptyList()
 )
