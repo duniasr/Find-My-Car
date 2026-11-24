@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 data class MapUiState(
     val searchQuery: String = "",
     val isLoading: Boolean = false,
-    val userLatitude: Double = 40.416775,
-    val userLongitude: Double = -3.703790,
+    val userLatitude: Double? = null,
+    val userLongitude: Double? = null,
     val parkingPois: List<ParkingPoi> = emptyList()
 )
 
@@ -34,6 +34,15 @@ class MapViewModel(
             repository.getParkingPois().collect { pois ->
                 _uiState.update { it.copy(parkingPois = pois) }
             }
+        }
+    }
+
+    fun updateUserLocation(latitude: Double, longitude: Double) {
+        _uiState.update {
+            it.copy(
+                userLatitude = latitude,
+                userLongitude = longitude
+            )
         }
     }
 
