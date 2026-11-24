@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
     implementation(libs.play.services.location)
+    implementation("com.google.maps.android:maps-compose:6.2.1")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
     implementation(libs.coil.compose)
     implementation("org.osmdroid:osmdroid-android:6.1.20")
     implementation(libs.androidx.core.ktx)
