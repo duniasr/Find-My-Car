@@ -26,6 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.findmycar.ui.map.MapScreen
+import com.findmycar.ui.mycars.MyCarsScreen
+import com.findmycar.ui.mycars.MyCarsViewModel
 import com.findmycar.ui.park.ParkCarScreen
 import com.findmycar.ui.park.ParkCarViewModel
 import com.findmycar.ui.theme.FindMyCarTheme
@@ -83,7 +85,20 @@ fun FindMyCarApp() {
                     )
                 }
             }
-            AppDestinations.MY_CARS -> PlaceholderScreen("Mis coches aparcados", modifier = Modifier.padding(innerPadding))
+            AppDestinations.MY_CARS -> {
+                if (LocalInspectionMode.current) {
+                    PlaceholderScreen("Mis coches aparcados (Vista previa)", modifier = Modifier.padding(innerPadding))
+                } else {
+                    val context = LocalContext.current
+                    val myCarsViewModel: MyCarsViewModel = viewModel(
+                        factory = MyCarsViewModel.provideFactory(context)
+                    )
+                    MyCarsScreen(
+                        viewModel = myCarsViewModel,
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
         }
     }
 }
