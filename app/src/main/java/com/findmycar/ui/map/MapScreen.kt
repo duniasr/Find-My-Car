@@ -43,7 +43,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MapScreen(
     modifier: Modifier = Modifier,
-    viewModel: MapViewModel = viewModel()
+    viewModel: MapViewModel = viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -51,11 +51,11 @@ fun MapScreen(
 
     var hasLocationPermission by remember {
         mutableStateOf(
-            ContextCompat.checkSelfPermission(
+            (ContextCompat.checkSelfPermission(
                 context, Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+            ) == PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(
                 context, Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED)
         )
     }
 
