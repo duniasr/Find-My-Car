@@ -108,7 +108,7 @@ enum class AppDestinations(
     val icon: Int,
 ) {
     MAP("Mapa", R.drawable.ic_home),
-    PARK("Aparcar", R.drawable.ic_favorite),
+    PARK("Aparcar", R.drawable.ic_form),
     MY_CARS("Mis coches", R.drawable.ic_account_box),
 }
 
